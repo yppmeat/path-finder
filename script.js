@@ -125,6 +125,31 @@ $resTools.addEventListener('change', e => {
   $tools.querySelector(`[value="${e.target.value}"]`).checked = true;
 });
 
+function countGroup(map) {
+  const visited = [...Array(size)].map(v => Array(size).fill(false));
+  let count = 0;
+  
+  function explore(x, y) {
+    if(x < 0 || x >= size || y < 0 || y >= size || visited[y][x] || map[y][x] != null) return;
+    visited[y][x] = true;
+    explore(x, y - 1);
+    explore(x + 1, y);
+    explore(x, y + 1);
+    explore(x - 1, y);
+  }
+  
+  for(let y = 0; y < size; y++) {
+    for(let x = 0; x < size; x++) {
+      if(!visited[y][x] && map[y][x] == null) {
+        count++;
+        explore(x, y);
+      }
+    }
+  }
+  
+  return count;
+}
+
 async function search() {
   const data = [...getAllTd()].map(v => {
     return typeList[v.className] ?? 0;
@@ -149,6 +174,10 @@ async function search() {
   async function next(pos, map, index, prevDir) {
     if(!searching) return;
     
+    if(countGroup(map) >= 2) {
+      return;
+    }
+    
     totalMoveCount++;
     $info.innerHTML = `解法検索中（長時間お待ちください）<br>試行回数: ${totalMoveCount}, 解法数: ${answer}`;
     display(map);
@@ -169,7 +198,7 @@ async function search() {
     
     if(td[y][x] == 4) {
       if(!map.flat().includes(null)) {
-        result.push(structuredClone(map));
+        result.push(map);
         answer++;
       }
       return;
