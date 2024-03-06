@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Path Finder</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Path Finder</h2>
+  <div class="editor">
+    <div class="column">
+      <div class="table">
+        <table id="$table">
+          <!-- Insert by JavaScript -->
+        </table>
+        <canvas id="$canvas"></canvas>
+      </div>
+      <span id="$info"></span>
+      <div class="nav">
+        <div id="$resTools">
+          <label>
+            <div class="tool" style="background-color: var(--blue);"></div>
+            <span>青色マス</span>
+            <input type="radio" name="tool2" value="blue" checked>
+          </label>
+          <label>
+            <div class="tool" style="background-color: var(--red);"></div>
+            <span>赤色マス</span>
+            <input type="radio" name="tool2" value="red">
+          </label>
+          <label>
+            <div class="tool">S</div>
+            <span>スタート</span>
+            <input type="radio" name="tool2" value="start">
+          </label>
+          <label>
+            <div class="tool">G</div>
+            <span>ゴール</span>
+            <input type="radio" name="tool2" value="goal">
+          </label>
+        </div>
+        <div class="answer">
+          <input type="range" id="$answerRange" min="0">
+          <div class="answerbuttons">
+            <input type="button" value="前" id="$prev">
+            <span id="$answerInfo">解法17の1</span>
+            <input type="button" value="次" id="$next">
+          </div>
+        </div>
+        <div class="range">
+          <input type="range" id="$range" min="0" max="1333" value="666">
+          <div class="range-info">
+            <span>遅い/軽い</span>
+            <span>検索速度</span>
+            <span>速い/重い</span>
+          </div>
+        </div>
+        <div class="upper-searching">
+          <input type="button" value="戻る" id="$cancel">
+        </div>
+        <div class="upper">
+          <input type="button" value="リセット" id="$reset">
+          <input type="button" value="解法検索" id="$search">
+        </div>
+        <div class="lower">
+          <input type="button" value="書き出し" id="$save">
+          <input type="button" value="読み込み" id="$load">
+        </div>
+      </div>
+    </div>
+    <div id="$tools">
+      <label>
+        <div class="tool" style="background-color: var(--blue);"></div>
+        <span>青色マス</span>
+        <input type="radio" name="tool" value="blue" checked>
+      </label>
+      <label>
+        <div class="tool" style="background-color: var(--red);"></div>
+        <span>赤色マス</span>
+        <input type="radio" name="tool" value="red">
+      </label>
+      <label>
+        <div class="tool">S</div>
+        <span>スタート</span>
+        <input type="radio" name="tool" value="start">
+      </label>
+      <label>
+        <div class="tool">G</div>
+        <span>ゴール</span>
+        <input type="radio" name="tool" value="goal">
+      </label>
+    </div>
+  </div>
+</body>
+</html>

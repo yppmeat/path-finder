@@ -1,0 +1,269 @@
+:root {
+  --blue: rgba(0, 0, 255, 0.2);
+  --blue-hover: rgb(194, 194, 242);
+  --red: rgba(255, 0, 0, 0.2);
+  --red-hover: rgb(242,194,194);
+  --hover: rgba(0, 0, 0, 0.05);
+  --active: rgba(0, 0, 0, 0.1);
+  font-size: 10px;
+}
+
+input[type=button] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 5rem;
+  font-size: 1.6rem;
+}
+
+.editor {
+  display: flex;
+  gap: 5rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.column .table {
+  position: relative;
+}
+.column .table canvas {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.column #\$info {
+  margin-bottom: -3rem;
+}
+.column .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.column .nav .answer {
+  display: none;
+  flex-direction: column;
+}
+.column .nav .answer .answerbuttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.column .nav .answer .answerbuttons input {
+  background-color: initial;
+  outline: initial;
+  cursor: pointer;
+  border: 0.2rem solid var(--active);
+  border-radius: 0.5rem;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  padding: 1rem 2rem;
+}
+.column .nav .answer .answerbuttons input:hover {
+  background-color: var(--hover);
+}
+.column .nav .range {
+  display: none;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.column .nav .range input {
+  width: 100%;
+}
+.column .nav .range .range-info {
+  display: flex;
+  justify-content: space-between;
+}
+.column .nav .range .range-info span {
+  font-size: 1.3rem;
+}
+.column .nav .range .range-info span:nth-child(2) {
+  font-size: 1.6rem;
+}
+.column .nav .upper-searching, .column .nav .upper, .column .nav .lower {
+  display: flex;
+  justify-content: space-around;
+}
+.column .nav .upper-searching input, .column .nav .upper input, .column .nav .lower input {
+  background-color: initial;
+  outline: initial;
+  cursor: pointer;
+  border: 0.2rem solid var(--active);
+  border-radius: 0.5rem;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  padding: 1rem 4rem;
+}
+.column .nav .upper-searching input:hover, .column .nav .upper input:hover, .column .nav .lower input:hover {
+  background-color: var(--hover);
+}
+.column .nav .upper-searching {
+  display: none;
+}
+
+body.searching #\$info {
+  margin-bottom: 0 !important;
+}
+body.searching .range {
+  display: flex !important;
+}
+
+body.view .answer {
+  display: flex !important;
+}
+body.view .range {
+  display: none !important;
+}
+
+body.searching canvas, body.view canvas {
+  display: block !important;
+}
+body.searching .upper-searching, body.view .upper-searching {
+  display: flex !important;
+}
+body.searching .upper, body.searching .lower, body.view .upper, body.view .lower {
+  display: none !important;
+}
+body.searching #\$tools, body.view #\$tools {
+  opacity: 0.3;
+  pointer-events: none;
+}
+body.searching #\$resTools, body.view #\$resTools {
+  display: none !important;
+}
+
+table {
+  flex-shrink: 0;
+  border: 0.2rem solid black;
+  border-collapse: collapse;
+}
+table td {
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+  border: 0.1rem solid black;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+table td:hover {
+  background-color: var(--hover);
+}
+table td.blue:hover {
+  background-color: var(--blue-hover);
+}
+table td.red:hover {
+  background-color: var(--red-hover);
+}
+table td.blue {
+  background-color: var(--blue);
+}
+table td.red {
+  background-color: var(--red);
+}
+table td.start::before {
+  content: "S";
+}
+table td.goal::before {
+  content: "G";
+}
+table td::before {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+#\$tools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#\$tools label {
+  display: flex;
+  gap: 2rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+#\$tools label:hover {
+  background-color: var(--hover);
+}
+#\$tools label:has(input:checked) {
+  background-color: var(--active);
+}
+#\$tools label .tool {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+#\$tools label span {
+  display: grid;
+  place-items: center;
+}
+#\$tools label input {
+  display: none;
+}
+
+#\$resTools {
+  display: none;
+  justify-content: space-between;
+  border: 0.2rem solid var(--active);
+  border-radius: 0.5rem;
+}
+#\$resTools label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+#\$resTools label:hover {
+  background-color: var(--hover);
+}
+#\$resTools label .tool {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+#\$resTools label span, #\$resTools label input {
+  display: none;
+}
+#\$resTools label:has(input:checked) {
+  background-color: var(--active);
+}
+#\$resTools label:has(input:checked) span {
+  display: inline;
+}
+
+@media screen and (max-width: 640px) {
+  #\$tools {
+    display: none;
+  }
+  #\$resTools {
+    display: flex;
+  }
+}/*# sourceMappingURL=style.css.map */
